@@ -1,17 +1,15 @@
-import { InputHTMLAttributes } from 'react';
-import { AllHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 import classes from './Input.module.css';
 
 type InputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
   'type' | 'min' | 'max' | 'step' | 'defaultValue'
->;
+> & {
+  id?: string;
+  label?: ReactNode;
+};
 
-type HtmlProps = Pick<AllHTMLAttributes<HTMLElement>, 'id' | 'label'>;
-
-type AllProps = InputProps & HtmlProps;
-
-const Input = ({ label, id, type, min, max, step, defaultValue }: AllProps) => {
+const Input = ({ label, id, type, min, max, step, defaultValue }: InputProps) => {
   return (
     <div className={classes.input}>
       <label htmlFor={id}>{label}</label>

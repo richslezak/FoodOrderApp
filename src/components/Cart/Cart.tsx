@@ -1,5 +1,11 @@
+import { MouseEventHandler } from 'react';
 import Modal from '../UI/Modal';
 import classes from './Cart.module.css';
+
+// type CartProps = {
+//   onClose?: MouseEventHandler<HTMLDivElement>;
+//   onClick?: MouseEventHandler<HTMLButtonElement>;
+// };
 
 const Cart = (props: any) => {
   const cartItems = [

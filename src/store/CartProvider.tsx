@@ -1,5 +1,16 @@
-import { useReducer } from 'react';
+import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useReducer } from 'react';
 import CartContext from './cart-context';
+
+type CartProviderProps = {
+  children?:
+    | string
+    | number
+    | boolean
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | ReactFragment
+    | ReactPortal
+    | null;
+};
 
 const defaultCartState = {
   items: [],
@@ -18,7 +29,7 @@ const cartReducer = (state: typeof defaultCartState, action: any) => {
   return defaultCartState;
 };
 
-const CartProvider = (props: any) => {
+const CartProvider = (props: CartProviderProps) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
   const addItemToCartHandler = (item: string) => {

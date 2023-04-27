@@ -2,8 +2,13 @@
 import HeaderCartButton from './HeaderCartButton';
 import mealsImage from '../../assets/meals.jpg';
 import classes from './Header.module.css';
+import { MouseEventHandler } from 'react';
 
-const Header = (props: any) => {
+type HeaderProps = {
+  onShowCart?: MouseEventHandler<HTMLButtonElement>;
+};
+
+const Header = (props: HeaderProps) => {
   return (
     <>
       <header className={classes.header}>

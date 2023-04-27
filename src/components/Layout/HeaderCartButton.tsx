@@ -1,9 +1,13 @@
-import { useContext } from 'react';
+import { MouseEventHandler, useContext } from 'react';
 import CartIcon from '../Cart/CartIcon';
 import classes from './HeaderCartButton.module.css';
 import CartContext from '../../store/cart-context';
 
-const HeaderCartButton = (props: any) => {
+type HeaderCartButtonProps = {
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+const HeaderCartButton = (props: HeaderCartButtonProps) => {
   const cartCtx = useContext(CartContext);
   const numberOfCartItems = cartCtx.items.reduce(
     (currentNumber: number, item: { amount: number }) => {

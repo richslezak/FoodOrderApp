@@ -2,7 +2,12 @@ import { SyntheticEvent, useRef, useState } from 'react';
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
 
-const MealItemFrom = (props: any) => {
+type MealItemFormProps = {
+  onAddToCart: (arg0: number) => void;
+  id: string;
+};
+
+const MealItemFrom = (props: MealItemFormProps) => {
   const amountInputRef = useRef<any>(null);
 
   const [amountIsValid, setAmountIsValid] = useState(true);

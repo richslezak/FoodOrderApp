@@ -19,7 +19,7 @@ const Cart = (props: CartProps) => {
     cartCtx.addItem({ ...item, amount: 1 });
   };
 
-  const cartItems = cartCtx.items.map((item) => (
+  const cartItems = cartCtx.items.map((item: any) => (
     <CartItem
       key={item.id}
       name={item.name}

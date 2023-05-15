@@ -1,57 +1,35 @@
-import {
-  JSXElementConstructor,
-  MouseEventHandler,
-  ReactElement,
-  ReactFragment,
-  ReactPortal,
-} from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import classes from './Modal.module.css';
 import ReactDOM from 'react-dom';
 
 type BackdropProps = { onClose?: MouseEventHandler<HTMLDivElement> };
 
-type ModalOverlayProps = {
-  children?:
-    | string
-    | number
-    | boolean
-    | ReactFragment
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactPortal
-    | null;
-};
+type ModalOverlayProps = { children?: ReactNode };
 
 type ModalProps = {
   onClose?: MouseEventHandler<HTMLDivElement>;
-  children?:
-    | string
-    | number
-    | boolean
-    | ReactFragment
-    | ReactPortal
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | null;
+  children?: ReactNode;
 };
 
-const Backdrop = (props: BackdropProps) => {
-  return <div className={classes.backdrop} onClick={props.onClose} />;
+const Backdrop = ({ onClose }: BackdropProps) => {
+  return <div className={classes.backdrop} onClick={onClose} />;
 };
 
-const ModalOverlay = (props: ModalOverlayProps) => {
+const ModalOverlay = ({ children }: ModalOverlayProps) => {
   return (
     <div className={classes.modal}>
-      <div className={classes.content}>{props.children}</div>
+      <div className={classes.content}>{children}</div>
     </div>
   );
 };
 
 const portalElement = document.getElementById('overlays')!;
 
-const Modal = (props: ModalProps) => {
+const Modal = ({ onClose, children }: ModalProps) => {
   return (
     <>
-      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
-      {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClose={onClose} />, portalElement)}
+      {ReactDOM.createPortal(<ModalOverlay>{children}</ModalOverlay>, portalElement)}
     </>
   );
 };

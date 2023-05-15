@@ -10,29 +10,29 @@ type MealItemProps = {
   description: string;
 };
 
-const MealItem = (props: MealItemProps) => {
+const MealItem = ({ price, id, name, description }: MealItemProps) => {
   const cartCtx = useContext(CartContext);
 
-  const price = `$${props.price.toFixed(2)}`;
+  const itemPrice = `$${price.toFixed(2)}`;
 
   const addToCartHandler = (amount: number) => {
     cartCtx.addItem({
-      id: props.id,
-      name: props.name,
+      id: id,
+      name: name,
       amount: amount,
-      price: props.price,
+      price: price,
     });
   };
 
   return (
     <li className={classes.meal}>
       <div>
-        <h3>{props.name}</h3>
-        <div className={classes.description}>{props.description}</div>
-        <div className={classes.price}>{price}</div>
+        <h3>{name}</h3>
+        <div className={classes.description}>{description}</div>
+        <div className={classes.price}>{itemPrice}</div>
       </div>
       <div>
-        <MealItemFrom id={props.id} onAddToCart={addToCartHandler} />
+        <MealItemFrom id={id} onAddToCart={addToCartHandler} />
       </div>
     </li>
   );

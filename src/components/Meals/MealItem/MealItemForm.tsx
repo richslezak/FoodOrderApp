@@ -1,4 +1,4 @@
-import { SyntheticEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
 
@@ -7,14 +7,14 @@ type MealItemFormProps = {
   id: string;
 };
 
-const MealItemFrom = (props: MealItemFormProps) => {
-  const amountInputRef = useRef<any>(null);
+const MealItemFrom = ({ onAddToCart, id }: MealItemFormProps) => {
+  const amountInputRef = useRef<HTMLInputElement>(null!);
 
   const [amountIsValid, setAmountIsValid] = useState(true);
 
-  const submitHandler = (event: SyntheticEvent) => {
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const enteredAmount = amountInputRef.current.value;
+    const enteredAmount = amountInputRef?.current?.value;
     const enteredAmountNumber = +enteredAmount;
 
     if (enteredAmount.trim().length === 0 || enteredAmountNumber < 1 || enteredAmountNumber > 5) {
@@ -22,7 +22,7 @@ const MealItemFrom = (props: MealItemFormProps) => {
       return;
     }
 
-    props.onAddToCart(enteredAmountNumber);
+    onAddToCart(enteredAmountNumber);
   };
 
   return (
@@ -30,7 +30,7 @@ const MealItemFrom = (props: MealItemFormProps) => {
       <Input
         ref={amountInputRef}
         label="Ammount"
-        id={`amount_ ${props.id}`}
+        id={`amount_ ${id}`}
         type="number"
         min={1}
         max={5}

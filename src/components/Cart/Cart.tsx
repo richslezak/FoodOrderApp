@@ -8,7 +8,14 @@ type CartProps = {
   onClose?: MouseEventHandler;
 };
 
-const Cart = (props: CartProps) => {
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  amount: number;
+};
+
+const Cart = ({ onClose }: CartProps) => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
@@ -19,7 +26,7 @@ const Cart = (props: CartProps) => {
     cartCtx.addItem({ ...item, amount: 1 });
   };
 
-  const cartItems = cartCtx.items.map((item: any) => (
+  const cartItems = cartCtx.items.map((item: CartItem) => (
     <CartItem
       key={item.id}
       name={item.name}
@@ -31,14 +38,14 @@ const Cart = (props: CartProps) => {
   ));
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal onClose={onClose}>
       <ul className={classes['cart-items']}>{cartItems}</ul>
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes['button-alt']} onClick={props.onClose}>
+        <button className={classes['button-alt']} onClick={onClose}>
           Close
         </button>
         {hasItems && <button className={classes.button}>Order</button>}

@@ -8,12 +8,12 @@ type HeaderProps = {
   onShowCart?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const Header = (props: HeaderProps) => {
+const Header = ({ onShowCart }: HeaderProps) => {
   return (
     <>
       <header className={classes.header}>
         <h1>World Meals</h1>
-        <HeaderCartButton onClick={props.onShowCart} />
+        <HeaderCartButton onClick={onShowCart} />
       </header>
       <div className={classes['main-image']}>
         <img src={mealsImage} alt="A table full of food!" />

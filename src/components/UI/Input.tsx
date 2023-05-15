@@ -6,7 +6,7 @@ type InputProps = Pick<
   'type' | 'min' | 'max' | 'step' | 'defaultValue'
 > & {
   id?: string;
-  label?: ReactNode;
+  label?: string;
 };
 
 export type Ref = HTMLInputElement;

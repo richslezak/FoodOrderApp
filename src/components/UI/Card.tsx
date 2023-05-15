@@ -1,12 +1,12 @@
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react';
+import { ReactNode } from 'react';
 import classes from './Card.module.css';
 
 type CardProps = {
-  children?: ReactElement<any, string | JSXElementConstructor<any>>;
+  children?: ReactNode;
 };
 
-const Card = (props: CardProps) => {
-  return <div className={classes.card}>{props.children}</div>;
+const Card = ({ children }: CardProps) => {
+  return <div className={classes.card}>{children}</div>;
 };
 
 export default Card;
